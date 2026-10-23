@@ -1,0 +1,373 @@
+```html
+<!DOCTYPE html>
+<html lang="hi" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>VibeGram Pro • सत्यम आनंद (@likeyou1995)</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            vgDark: '#080c16',
+            vgSurface: '#0f172a',
+            vgCard: '#151f38',
+            vgBorder: 'rgba(255, 255, 255, 0.08)',
+            ytRed: '#ff0000',
+            igPink: '#e1306c',
+            igAmber: '#f59e0b'
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Google Font & FontAwesome 6 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Canvas Confetti & QRCode.js -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    * { -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background-color: #080c16; color: #f1f5f9; }
+
+    .glass {
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .insta-gradient {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Filters for Upload Studio */
+    .filter-normal { filter: none; }
+    .filter-vintage { filter: sepia(0.55) contrast(1.15) brightness(0.95); }
+    .filter-cyber { filter: hue-rotate(185deg) saturate(1.8) contrast(1.2); }
+    .filter-bw { filter: grayscale(1) contrast(1.25); }
+    .filter-golden { filter: saturate(1.7) brightness(1.1) sepia(0.25); }
+
+    /* Keyframe Animations */
+    @keyframes heartBurst {
+      0% { transform: scale(0) rotate(-15deg); opacity: 0; }
+      50% { transform: scale(1.4) rotate(0deg); opacity: 1; }
+      80% { transform: scale(1.1) rotate(5deg); opacity: 0.95; }
+      100% { transform: scale(0.9); opacity: 0; }
+    }
+    .animate-heart-burst {
+      animation: heartBurst 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes discSpin {
+      100% { transform: rotate(360deg); }
+    }
+    .animate-disc-spin {
+      animation: discSpin 4s linear infinite;
+    }
+
+    @keyframes pulseLive {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .animate-live-dot {
+      animation: pulseLive 1.5s ease-in-out infinite;
+    }
+
+    @keyframes liveCounterPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.25); color: #22c55e; }
+      100% { transform: scale(1); }
+    }
+    .animate-counter-tick {
+      animation: liveCounterPop 0.4s ease-out;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col justify-between overflow-x-hidden select-none bg-vgDark text-slate-100">
+
+  <!-- ============================================================== -->
+  <!-- 1. MANDATORY LOGIN & REGISTRATION GATEWAY                      -->
+  <!-- ============================================================== -->
+  <section id="authGatewayScreen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-vgDark/95 backdrop-blur-2xl overflow-y-auto">
+    <div class="glass w-full max-w-md rounded-3xl p-6 sm:p-7 border border-red-500/25 shadow-2xl relative my-auto">
+      
+      <div class="absolute -top-16 -left-16 w-36 h-36 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-pink-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- App Header -->
+      <div class="text-center mb-5 relative z-10">
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl insta-gradient text-white shadow-xl shadow-pink-600/30 mb-2.5">
+          <i class="fa-solid fa-play text-2xl"></i>
+        </div>
+        <h1 class="text-2xl font-black bg-gradient-to-r from-red-500 via-pink-500 to-amber-400 bg-clip-text text-transparent">VibeGram Pro</h1>
+        <p class="text-xs text-gray-300 font-medium mt-1">
+          ऑफिशियल क्रिएटर: <span class="text-red-400 font-extrabold">सत्यम आनंद (@likeyou1995)</span>
+        </p>
+        <p class="text-[11px] text-gray-400 mt-0.5">अपनी पसंद की प्रोफाइल फोटो लगाएं और अकाउंट बनाकर जुड़ें</p>
+      </div>
+
+      <!-- Tabs (Signup / Login) -->
+      <div class="grid grid-cols-2 p-1 bg-vgDark/90 rounded-2xl border border-vgBorder mb-4 relative z-10">
+        <button id="tabBtnSignup" onclick="setAuthMode('signup')" class="py-2.5 rounded-xl text-xs font-black transition-all bg-gradient-to-r from-red-600 to-pink-600 text-white shadow-md">
+          नया खाता (Sign Up)
+        </button>
+        <button id="tabBtnLogin" onclick="setAuthMode('login')" class="py-2.5 rounded-xl text-xs font-bold transition-all text-gray-400 hover:text-white">
+          लॉगिन (Log In)
+        </button>
+      </div>
+
+      <!-- SIGN UP FORM -->
+      <form id="signupForm" onsubmit="handleSignup(event)" class="space-y-3 relative z-10">
+        
+        <!-- Custom Avatar File Picker from Gallery -->
+        <div class="flex flex-col items-center mb-2">
+          <div class="relative cursor-pointer group" onclick="document.getElementById('signupPhotoInput').click()" title="फोन गैलरी से अपनी मनपसंद फोटो चुनें">
+            <div class="w-20 h-20 rounded-full p-1 insta-gradient shadow-xl group-hover:scale-105 transition">
+              <img id="signupPhotoPreview" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200" class="w-full h-full rounded-full object-cover border-2 border-vgDark">
+            </div>
+            <div class="absolute bottom-0 right-0 bg-red-600 text-white w-7 h-7 rounded-full flex items-center justify-center border-2 border-vgDark text-xs shadow-lg">
+              <i class="fa-solid fa-camera"></i>
+            </div>
+          </div>
+          <button type="button" onclick="document.getElementById('signupPhotoInput').click()" class="text-[11px] text-pink-400 font-bold mt-1.5 flex items-center gap-1 hover:underline">
+            <i class="fa-solid fa-images text-xs"></i> गैलरी से अपनी पसंद का फोटो लगाएं
+          </button>
+          <input type="file" id="signupPhotoInput" accept="image/*" class="hidden" onchange="previewSignupPhoto(event)">
+        </div>
+
+        <div>
+          <label class="text-[11px] font-bold text-gray-300 block mb-1">आपका पूरा नाम (Name) *</label>
+          <div class="relative">
+            <i class="fa-solid fa-user absolute left-3.5 top-3.5 text-gray-500 text-xs"></i>
+            <input type="text" id="signupName" required placeholder="जैसे: राहुल शर्मा" class="w-full bg-vgDark border border-vgBorder rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-red-500">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[11px] font-bold text-gray-300 block mb-1">यूजरनेम (@handle) *</label>
+            <div class="relative">
+              <span class="absolute left-3 top-2.5 text-red-400 font-mono text-xs">@</span>
+              <input type="text" id="signupHandle" required placeholder="rahul_vibe" class="w-full bg-vgDark border border-vgBorder rounded-xl pl-7 pr-2.5 py-2.5 text-xs text-white font-mono placeholder-gray-600 focus:outline-none focus:border-red-500">
+            </div>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-gray-300 block mb-1">पासवर्ड *</label>
+            <div class="relative">
+              <i class="fa-solid fa-lock absolute left-3.5 top-3.5 text-gray-500 text-xs"></i>
+              <input type="password" id="signupPassword" required placeholder="••••••••" class="w-full bg-vgDark border border-vgBorder rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-red-500">
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="text-[11px] font-bold text-gray-300 block mb-1">ईमेल आईडी (Email) *</label>
+          <div class="relative">
+            <i class="fa-solid fa-envelope absolute left-3.5 top-3.5 text-gray-500 text-xs"></i>
+            <input type="email" id="signupEmail" required placeholder="rahul@gmail.com" class="w-full bg-vgDark border border-vgBorder rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-red-500">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-red-600 via-pink-600 to-amber-500 text-white font-black text-xs shadow-lg shadow-pink-600/30 active:scale-98 transition flex items-center justify-center space-x-2 mt-3">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>खाता बनाएं और प्रवेश करें</span>
+        </button>
+      </form>
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-3.5 hidden relative z-10">
+        <div>
+          <label class="text-[11px] font-bold text-gray-300 block mb-1">ईमेल या @यूजरनेम</label>
+          <div class="relative">
+            <i class="fa-solid fa-at absolute left-3.5 top-3.5 text-gray-500 text-xs"></i>
+            <input type="text" id="loginIdentifier" required placeholder="ईमेल या @username लिखें" class="w-full bg-vgDark border border-vgBorder rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-red-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="text-[11px] font-bold text-gray-300 block mb-1">पासवर्ड</label>
+          <div class="relative">
+            <i class="fa-solid fa-lock absolute left-3.5 top-3.5 text-gray-500 text-xs"></i>
+            <input type="password" id="loginPassword" required placeholder="पासवर्ड दर्ज करें" class="w-full bg-vgDark border border-vgBorder rounded-xl pl-9 pr-3.5 py-2.5 text-xs text-white placeholder-gray-600 focus:outline-none focus:border-red-500">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-black text-xs shadow-lg shadow-red-600/30 active:scale-98 transition flex items-center justify-center space-x-2 mt-4">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>लॉगिन करें</span>
+        </button>
+
+        <!-- Direct Test As Satyam Anand -->
+        <div class="p-3 rounded-2xl bg-vgDark border border-vgBorder text-center">
+          <p class="text-[11px] text-gray-400">सत्यम आनंद के मुख्य क्रिएटर खाते से खोलें:</p>
+          <button type="button" onclick="loginAsSatyamDirectly()" class="mt-1.5 text-xs font-black text-amber-400 hover:underline">
+            👑 सत्यम आनंद (@likeyou1995)
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- 2. MAIN APPLICATION CONTENT                                    -->
+  <!-- ============================================================== -->
+  <div id="mainAppContent" class="hidden flex-col h-full">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-40 glass px-4 py-2.5 flex justify-between items-center shadow-lg border-b border-gray-800">
+      <div class="flex items-center space-x-2 cursor-pointer" onclick="switchTab('feed')">
+        <div class="w-8 h-8 rounded-xl insta-gradient flex items-center justify-center text-white shadow-md shadow-pink-600/30">
+          <i class="fa-solid fa-play text-xs"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-1.5">
+            <span class="text-base font-black bg-gradient-to-r from-red-500 via-pink-500 to-amber-400 bg-clip-text text-transparent">VibeGram</span>
+            <span class="text-[8px] bg-red-600 text-white font-black px-1.5 py-0.5 rounded-full leading-none">PRO</span>
+          </div>
+          <!-- Live Network Indicator -->
+          <div class="flex items-center space-x-1 mt-0.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-live-dot"></span>
+            <span id="liveOnlineUsers" class="text-[9px] text-emerald-400 font-mono font-bold">हकीकत लाइव सक्रिय</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Icons -->
+      <div class="flex items-center space-x-2">
+        <!-- Official Channel Button -->
+        <a href="https://www.youtube.com/@likeyou1995" target="_blank" rel="noopener noreferrer" 
+           class="bg-red-600 hover:bg-red-700 text-white text-[11px] font-black px-3 py-1.5 rounded-full flex items-center space-x-1 shadow-md shadow-red-600/40 active:scale-95 transition">
+          <i class="fa-brands fa-youtube"></i>
+          <span>सब्सक्राइब</span>
+        </a>
+
+        <!-- Notifications Bell -->
+        <button onclick="toggleNotificationsModal()" class="relative p-2 text-gray-300 hover:text-white active:scale-90 transition">
+          <i class="fa-regular fa-bell text-lg"></i>
+          <span id="notifBadge" class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-red-500"></span>
+        </button>
+
+        <!-- Direct Messages (DM) -->
+        <button onclick="toggleDirectMessagesModal()" class="relative p-2 text-gray-300 hover:text-white active:scale-90 transition">
+          <i class="fa-regular fa-paper-plane text-lg"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hidden Profile Image Picker for in-app changes -->
+    <input type="file" id="changeUserPhotoInput" accept="image/*" class="hidden" onchange="handleUserPhotoUpdate(event)">
+
+    <!-- Main Scrollable Screen -->
+    <main class="flex-1 overflow-y-auto pb-24">
+
+      <!-- ================= TAB 1: FEED ================= -->
+      <div id="tab-feed" class="max-w-lg mx-auto w-full">
+        
+        <!-- Live Ticker Bar (हकीकत में बढ़ते हुए सब्सक्राइब और लाइक्स का लाइव टिकर) -->
+        <div class="bg-red-950/30 border-b border-red-500/20 px-3 py-1.5 flex items-center justify-between text-[11px]">
+          <div class="flex items-center space-x-2 truncate">
+            <span class="bg-red-600 text-white font-black text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider animate-pulse">LIVE</span>
+            <span id="liveTickerText" class="text-gray-300 font-medium truncate">सत्यम आनंद का चैनल लाइव प्रगति पर है...</span>
+          </div>
+          <span class="text-[10px] text-amber-400 font-mono font-bold flex-shrink-0 ml-2">
+            <i class="fa-solid fa-chart-line"></i> लाइव
+          </span>
+        </div>
+
+        <!-- 24h Stories / स्टेटस Bar -->
+        <div class="p-3 border-b border-gray-800/80">
+          <div class="flex items-center justify-between mb-2 px-1">
+            <span class="text-xs font-bold text-gray-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-bolt text-amber-400"></i> लाइव स्टेटस & स्टोरीज
+            </span>
+            <span class="text-[10px] text-pink-400 font-bold cursor-pointer" onclick="openStudioModal('story')">
+              + स्टोरी लगाएं
+            </span>
+          </div>
+
+          <div id="storiesContainer" class="flex space-x-3.5 overflow-x-auto no-scrollbar py-1">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- ================= OFFICIAL SATYAM ANAND CREATOR CARD ================= -->
+        <div class="p-3">
+          <div class="glass p-4 rounded-3xl border border-red-500/40 bg-gradient-to-r from-red-950/40 via-vgCard to-neutral-900 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-6 -bottom-6 text-red-600/10 text-9xl pointer-events-none">
+              <i class="fa-brands fa-youtube"></i>
+            </div>
+
+            <div class="flex items-center justify-between relative z-10">
+              <div class="flex items-center space-x-3">
+                <div class="w-13 h-13 rounded-full p-0.5 insta-gradient shadow-lg">
+                  <img id="spotlightAvatarImg" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150" class="w-12 h-12 rounded-full object-cover">
+                </div>
+                <div>
+                  <div class="flex items-center space-x-1.5">
+                    <h3 class="font-extrabold text-sm text-white">सत्यम आनंद</h3>
+                    <i class="fa-solid fa-circle-check text-blue-400 text-xs" title="Verified Creator"></i>
+                  </div>
+                  <p class="text-xs text-red-400 font-mono font-bold">@likeyou1995</p>
+                  
+                  <!-- REAL-TIME 0 COUNTER -->
+                  <div class="text-[11px] text-gray-400 mt-0.5 flex items-center gap-2">
+                    <span>
+                      <strong id="spotlightSubCount" class="text-white font-mono text-xs">0</strong> सब्सक्राइबर्स
+                    </span>
+                    <span>•</span>
+                    <span>
+                      <strong id="spotlightTotalLikes" class="text-white font-mono text-xs">0</strong> कुल लाइक्स
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Subscribe Button with Live Increment -->
+              <div class="flex flex-col space-y-1.5">
+                <button onclick="handleSatyamSubscribe()" id="spotlightSubBtn" class="bg-red-600 hover:bg-red-700 text-white text-xs font-black px-4 py-2 rounded-xl flex items-center space-x-1.5 shadow-lg shadow-red-600/30 active:scale-95 transition">
+                  <i class="fa-brands fa-youtube"></i>
+                  <span id="spotlightSubText">सब्सक्राइब</span>
+                </button>
+                <a href="https://www.youtube.com/@likeyou1995" target="_blank" class="text-[10px] text-center font-bold text-gray-400 hover:text-white underline">
+                  चैनल खोलें <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post Cards List (Strictly starts from ZERO) -->
+        <div id="postsList" class="px-3 space-y-4 pb-6">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+
+      <!-- ================= TAB 2: EXPLORE / SEARCH ================= -->
+      <div id="tab-explore" class="hidden max-w-lg mx-auto p-4 space-y-4">
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-xs"></i>
+          <input type="text" id="searchInput" oninput="filterExploreGrid()" placeholder="सत्यम आनंद, दोस्त या पोस्ट खोजें..." class="w-full bg-vgSurface border border-vgBorder rounded-2xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-red-500">
+        </div>
+
+        <div class="flex space-x-2 overflow-x-auto no-scrollbar py-1">
+          <span class="bg-red-600/20 text-red-400 border border-red-500/30 text-xs px-3 py-1 rounded-full cursor-pointer font-bold">#likeyou1995</span>
+          <span class="bg-vgSurface border border-vgBorder text-gray-300 text-xs px-3 py-1 rounded-full cursor-pointer font-bold">#SatyamAnand</span>
+          <span class="bg-vgSurface border border-vgBorder text-gray-300 text-xs px-3 py-1 rounded-full cursor-pointer font-bold">#ViralVibe</span>
+        </div>
+
+        <div id="exploreGrid" class="grid grid-cols-3 gap-1.5 
