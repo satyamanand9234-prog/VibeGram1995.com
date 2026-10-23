@@ -371,3 +371,146 @@
         </div>
 
         <div id="exploreGrid" class="grid grid-cols-3 gap-1.5 
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VibeGram1995</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f5fb;color:#222}
+header{background:linear-gradient(120deg,#6638e8,#e83e8c);color:white;padding:20px 15px;text-align:center}
+header h1{margin:0;font-size:28px}
+header p{margin:7px 0 0}
+.search{display:block;width:92%;max-width:500px;margin:16px auto;padding:13px;border:1px solid #ddd;border-radius:25px;font-size:16px}
+nav{display:flex;justify-content:space-around;gap:8px;padding:12px;background:white;position:sticky;top:0;box-shadow:0 2px 8px #0001}
+nav a{color:#633ce5;text-decoration:none;font-weight:bold;font-size:14px}
+main{max-width:650px;margin:18px auto;padding:0 12px}
+.welcome,.post,.create{background:white;border-radius:16px;padding:17px;margin-bottom:16px;box-shadow:0 4px 15px #0000000b}
+.welcome{background:linear-gradient(120deg,#eee8ff,#ffe7f2)}
+h2{margin-top:0}
+.create textarea{width:100%;min-height:75px;padding:12px;border:1px solid #ddd;border-radius:10px;font:inherit;resize:vertical}
+button{border:0;border-radius:22px;padding:10px 16px;background:#7044e8;color:white;font-weight:bold;cursor:pointer;margin:5px 4px 0 0}
+button:hover{opacity:.85}
+.post-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#7044e8,#f34b9a);display:grid;place-items:center;color:white;font-weight:bold}
+.post-image{width:100%;border-radius:12px;display:block;margin-top:12px;max-height:450px;object-fit:cover}
+.muted{color:#777;font-size:13px}
+footer{text-align:center;padding:25px;color:#777}
+#posts:empty:after{content:"अभी कोई पोस्ट नहीं है। अपनी पहली पोस्ट बनाएँ!";display:block;background:white;padding:20px;border-radius:12px}
+@media(min-width:600px){header h1{font-size:34px}.welcome{padding:24px}}
+</style>
+</head>
+<body>
+<header>
+<h1>✨ VibeGram1995</h1>
+<p>Share your moments. Connect your world.</p>
+</header>
+
+<input class="search" id="search" placeholder="🔎 पोस्ट खोजें..." oninput="searchPosts()">
+
+<nav>
+<a href="#home">🏠 होम</a>
+<a href="#create">➕ पोस्ट</a>
+<a href="#posts">❤️ फीड</a>
+<a href="#profile">👤 प्रोफाइल</a>
+</nav>
+
+<main id="home">
+<section class="welcome">
+<h2>आपका स्वागत है! 💜</h2>
+<p>अपनी पसंद की बातें, तस्वीरें और यादें शेयर करें।</p>
+<button onclick="document.getElementById('create').scrollIntoView({behavior:'smooth'})">+ नई पोस्ट बनाएँ</button>
+</section>
+
+<section class="create" id="create">
+<h2>✍️ कुछ शेयर करें</h2>
+<textarea id="postText" placeholder="आपके मन में क्या है?"></textarea>
+<input id="imageUrl" class="search" style="width:100%;margin:10px 0" placeholder="तस्वीर का लिंक (वैकल्पिक)">
+<button onclick="addPost()">पोस्ट शेयर करें</button>
+<p class="muted">यह शुरुआती डेमो है। पोस्ट अभी इसी ब्राउज़र में दिखाई देंगी।</p>
+</section>
+
+<section id="posts"></section>
+
+<section class="welcome" id="profile">
+<h2>👤 आपका प्रोफाइल</h2>
+<p>VibeGram1995 सदस्य</p>
+<p class="muted">आगे चलकर यहाँ प्रोफाइल फोटो, बायो और फॉलोअर्स जोड़े जा सकते हैं।</p>
+</section>
+</main>
+
+<footer>© 2026 VibeGram1995 · Made for your moments 💜</footer>
+
+<script>
+function addPost(){
+  const text=document.getElementById('postText').value.trim();
+  const url=document.getElementById('imageUrl').value.trim();
+  if(!text && !url){alert('कृपया कुछ लिखें या तस्वीर का लिंक डालें।');return;}
+  const post=document.createElement('article');
+  post.className='post';
+  post.dataset.search=(text+' '+url).toLowerCase();
+
+  const head=document.createElement('div');
+  head.className='post-head';
+  const avatar=document.createElement('div');
+  avatar.className='avatar';
+  avatar.textContent='V';
+  const info=document.createElement('div');
+  const name=document.createElement('strong');
+  name.textContent='VibeGram सदस्य';
+  const time=document.createElement('div');
+  time.className='muted';
+  time.textContent='अभी-अभी';
+  info.append(name,time);
+  head.append(avatar,info);
+  post.append(head);
+
+  if(text){
+    const p=document.createElement('p');
+    p.textContent=text;
+    post.append(p);
+  }
+  if(url){
+    try{
+      const parsed=new URL(url);
+      if(parsed.protocol==='https:' || parsed.protocol==='http:'){
+        const img=document.createElement('img');
+        img.className='post-image';
+        img.src=parsed.href;
+        img.alt='पोस्ट की तस्वीर';
+        img.onerror=()=>img.remove();
+        post.append(img);
+      }
+    }catch(e){}
+  }
+  const like=document.createElement('button');
+  like.textContent='❤️ Like 0';
+  let likes=0;
+  like.onclick=()=>{likes++;like.textContent='❤️ Like '+likes;};
+  const comment=document.createElement('button');
+  comment.textContent='💬 Comment';
+  comment.onclick=()=>{
+    const value=prompt('अपना कमेंट लिखें:');
+    if(value && value.trim()){
+      const p=document.createElement('p');
+      p.textContent='💬 '+value.trim();
+      post.append(p);
+    }
+  };
+  post.append(like,comment);
+  document.getElementById('posts').prepend(post);
+  document.getElementById('postText').value='';
+  document.getElementById('imageUrl').value='';
+}
+function searchPosts(){
+  const q=document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('#posts .post').forEach(post=>{
+    post.style.display=post.dataset.search.includes(q)?'block':'none';
+  });
+}
+</script>
+</body>
+  </html>
+  
